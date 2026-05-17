@@ -1,0 +1,16 @@
+{
+  "search": "Search",
+  "home": "Home",
+  "dashboard": "Dashboard",
+  "login": "Login",
+  "register": "Register",
+  "logout": "Logout",
+  "add_car": "Add Car",
+  "add_part": "Add Part",
+  "favorites": "Favorites",
+  "profile": "Profile",
+  "price": "Price",
+  "details": "Details",
+  "contact_seller": "Contact Seller",
+  "no_results": "No results found"
+}
