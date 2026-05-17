@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>پارەدان - ئۆتۆکورد</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/rtl.css">
+</head>
+<body>
+  <div id="navbar-container"></div>
+  <main class="container" style="max-width:500px;margin:2rem auto;">
+    <h2>تەواوکردنی کڕین</h2>
+    <div id="order-summary"></div>
+    <label>شێوازی پارەدان:</label>
+    <select id="payment-method">
+      <option value="zaincash">ZainCash</option>
+      <option value="fib">FIB Bank</option>
+    </select>
+    <button id="pay-btn">پارەدان</button>
+  </main>
+  <div id="footer-container"></div>
+  <script src="../js/api.js"></script>
+  <script src="../js/payment.js"></script>
+  <script>
+    loadComponent('../components/navbar.html', 'navbar-container');
+    loadComponent('../components/footer.html', 'footer-container');
+    // Assume order data passed via URL params or session
+    document.getElementById('pay-btn').addEventListener('click', async () => {
+      const method = document.getElementById('payment-method').value;
+      const payload = { orderId: 'PLACEHOLDER', paymentMethod: method, amount: 10000 };
+      await processPayment(payload);
+    });
+  </script>
+</body>
+</html>
