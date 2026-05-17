@@ -70,7 +70,7 @@ app.get('/api/health', (req, res) => {
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
-const server = app.listen(PORT, () => console.log(🚀 Server running on port ${PORT}));
+const server = app.listen(PORT, () => console.log('🚀 Server running on port ${PORT}'));
 
 // Socket.io setup
 const { initChat } = require('./sockets/chatSocket');
