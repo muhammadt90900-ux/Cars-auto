@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>وردەکاری ئۆتۆمبێل - ئۆتۆکورد</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/rtl.css">
+</head>
+<body>
+  <div id="navbar-container"></div>
+  <main class="container" style="padding:2rem;" id="car-detail"></main>
+  <div id="footer-container"></div>
+  <script src="../js/api.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/cars.js"></script>
+  <script>
+    loadComponent('../components/navbar.html', 'navbar-container');
+    loadComponent('../components/footer.html', 'footer-container');
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    fetchAPI('/cars/' + id).then(data => {
+      const car = data.data;
+      document.getElementById('car-detail').innerHTML = `
+        <h1>${car.make} ${car.model} (${car.year})</h1>
+        <img src="${car.images?.[0] || '../images/placeholder.jpg'}" style="max-width:100%">
+        <p>نرخ: ${formatPrice(car.price)}</p>
+        <p>${car.description || ''}</p>
+        <button onclick="contactSeller('${car.seller._id}')">پەیوەندی بە فرۆشیار</button>
+      `;
+    });
+  </script>
+</body>
+</html>
