@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>پشتڕاستکردنەوەی فرۆشیار - ئۆتۆکورد</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/rtl.css">
+</head>
+<body>
+  <div id="navbar-container"></div>
+  <main class="container" style="max-width:500px;margin:2rem auto;">
+    <h2>پشتڕاستکردنەوەی فرۆشیار</h2>
+    <form id="verify-form" enctype="multipart/form-data">
+      <label>بەڵگەنامەی ناسنامە:</label>
+      <input type="file" name="document" accept="image/*" required>
+      <button type="submit">ناردن</button>
+    </form>
+    <div id="verify-status"></div>
+  </main>
+  <div id="footer-container"></div>
+  <script src="../js/api.js"></script>
+  <script src="../js/utils.js"></script>
+  <script>
+    loadComponent('../components/navbar.html', 'navbar-container');
+    loadComponent('../components/footer.html', 'footer-container');
+    document.getElementById('verify-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const res = await fetch(API_BASE + '/users/verify', {
+        method: 'POST',
+        headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') },
+        body: formData
+      });
+      const result = await res.json();
+      document.getElementById('verify-status').textContent = result.message || 'داواکاری نێردرا';
+    });
+  </script>
+</body>
+</html>
