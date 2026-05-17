@@ -1,4 +1,4 @@
-require('dotenv').config({ path: './config/.env' });
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -28,14 +28,17 @@ const analyticsRoutes = require('./routes/analytics');
 const app = express();
 
 // Connect DB
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.error(err));
+mongoose.connect(process.env.MONGODB_URI || process.env.MONGO_URI)
+  .then(() => console.log('✅ MongoDB connected successfully'))
+  .catch(err => {
+    console.error('❌ MongoDB connection error:', err);
+    process.exit(1);
+  });
 
 // Middleware stack
 app.use(helmet());
 app.use(securityHeaders);
-app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
+app.use(cors({ origin: process.env.FRONTEND_URL || 'http://localhost:3000', credentials: true }));
 app.use(morgan('dev'));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
@@ -58,11 +61,16 @@ app.use('/api/search', searchRoutes);
 app.use('/api/favorites', favoritesRoutes);
 app.use('/api/analytics', analyticsRoutes);
 
+// Health check route
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'OK', message: 'AutoKurd API is running', timestamp: new Date() });
+});
+
 // Error handler (must be last)
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
-const server = app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+const server = app.listen(PORT, () => console.log(🚀 Server running on port ${PORT}));
 
 // Socket.io setup
 const { initChat } = require('./sockets/chatSocket');
@@ -70,12 +78,6 @@ const { initNotifications } = require('./sockets/notificationSocket');
 const io = require('socket.io')(server, { cors: { origin: '*' } });
 initChat(io);
 initNotifications(io);
-app.set('io', io); // make available to controllers
+app.set('io', io);
 
 module.exports = server;
-
-const connectDB = require('./config/db');
-require('dotenv').config();
-
-// Connect to MongoDB
-connectDB();
