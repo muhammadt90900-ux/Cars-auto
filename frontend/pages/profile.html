@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>پرۆفایل - ئۆتۆکورد</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/rtl.css">
+</head>
+<body>
+  <div id="navbar-container"></div>
+  <main class="container" style="max-width:500px;margin:2rem auto;">
+    <h2>پرۆفایلی من</h2>
+    <form id="profile-form">
+      <input type="text" id="name" placeholder="ناو">
+      <input type="email" id="email" disabled>
+      <input type="tel" id="phone" placeholder="ژمارە">
+      <button type="submit">نوێکردنەوە</button>
+    </form>
+  </main>
+  <div id="footer-container"></div>
+  <script src="../js/api.js"></script>
+  <script src="../js/utils.js"></script>
+  <script>
+    loadComponent('../components/navbar.html', 'navbar-container');
+    loadComponent('../components/footer.html', 'footer-container');
+    fetchAPI('/auth/me').then(res => {
+      const user = res.data;
+      document.getElementById('name').value = user.name || '';
+      document.getElementById('email').value = user.email;
+      document.getElementById('phone').value = user.phone || '';
+    });
+    document.getElementById('profile-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      await fetchAPI('/users/profile', {
+        method: 'PUT',
+        body: JSON.stringify({
+          name: document.getElementById('name').value,
+          phone: document.getElementById('phone').value
+        })
+      });
+      alert('پرۆفایل نوێ کرایەوە');
+    });
+  </script>
+</body>
+</html>
