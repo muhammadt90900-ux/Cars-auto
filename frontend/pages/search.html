@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>گەڕان - ئۆتۆکورد</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/rtl.css">
+</head>
+<body>
+  <div id="navbar-container"></div>
+  <main class="container">
+    <h1>ئەنجامی گەڕان</h1>
+    <div id="results" class="grid"></div>
+  </main>
+  <div id="footer-container"></div>
+  <script src="../js/api.js"></script>
+  <script src="../js/utils.js"></script>
+  <script>
+    loadComponent('../components/navbar.html', 'navbar-container');
+    loadComponent('../components/footer.html', 'footer-container');
+    const params = new URLSearchParams(window.location.search);
+    const query = params.get('q');
+    fetchAPI(`/search?q=${query}`).then(data => {
+      const resultsDiv = document.getElementById('results');
+      const cars = data.data.cars.map(car => renderCarCard(car)).join('');
+      const parts = data.data.parts.map(part => `<div class="card">${part.name}</div>`).join('');
+      resultsDiv.innerHTML = cars + parts;
+    });
+  </script>
+</body>
+</html>
