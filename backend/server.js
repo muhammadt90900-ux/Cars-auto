@@ -73,3 +73,9 @@ initNotifications(io);
 app.set('io', io); // make available to controllers
 
 module.exports = server;
+
+const connectDB = require('./config/db');
+require('dotenv').config();
+
+// Connect to MongoDB
+connectDB();
