@@ -1,0 +1,41 @@
+
+---
+
+## 🎨 بەشی ڕووکار – فایلی CSS ماوە
+
+### `dashboard.css`
+```css
+/* frontend/css/dashboard.css */
+.dashboard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 2rem;
+}
+.dashboard-sidebar {
+  flex: 1 1 250px;
+  background: var(--primary);
+  color: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+}
+.dashboard-sidebar a {
+  color: white;
+  display: block;
+  padding: 0.5rem 0;
+  text-decoration: none;
+}
+.dashboard-main {
+  flex: 3 1 600px;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+.stat-card {
+  background: var(--light);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
