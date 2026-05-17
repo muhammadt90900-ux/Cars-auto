@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>گەڕانی VIN - ئۆتۆکورد</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/rtl.css">
+</head>
+<body>
+  <div id="navbar-container"></div>
+  <main class="container" style="max-width:500px;margin:2rem auto;">
+    <h2>گەڕانی ژمارەی VIN</h2>
+    <input type="text" id="vin-input" placeholder="ژمارەی VIN">
+    <button id="search-vin">گەڕان</button>
+    <div id="vin-result"></div>
+  </main>
+  <div id="footer-container"></div>
+  <script src="../js/api.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/vin-search.js"></script>
+  <script>
+    loadComponent('../components/navbar.html', 'navbar-container');
+    loadComponent('../components/footer.html', 'footer-container');
+    document.getElementById('search-vin').addEventListener('click', async () => {
+      const vin = document.getElementById('vin-input').value;
+      const data = await lookupVin(vin);
+      document.getElementById('vin-result').innerHTML = `<p>مارکە: ${data.make}</p><p>مۆدێل: ${data.model}</p><p>ساڵ: ${data.year}</p>`;
+    });
+  </script>
+</body>
+</html>
