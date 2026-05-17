@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ئۆتۆکورد - بازاڕی ئۆتۆمبێل و پارچە</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/rtl.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <div id="navbar-container"></div>
+  <main>
+    <section class="hero">
+      <h1>بازاڕی ئۆتۆمبێل و پارچە لە کوردستان</h1>
+      <div class="search-box">
+        <input type="text" id="main-search" placeholder="گەڕان بۆ ئۆتۆمبێل یان پارچە...">
+        <button id="search-btn">گەڕان</button>
+      </div>
+    </section>
+    <section id="recommendations" class="grid"></section>
+    <section id="latest-cars" class="grid"></section>
+  </main>
+  <div id="footer-container"></div>
+
+  <script src="js/api.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/recommendation.js"></script>
+  <script src="js/cars.js"></script>
+  <script src="js/push.js"></script>
+  <script>
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', () => {
+      loadComponent('components/navbar.html', 'navbar-container');
+      loadComponent('components/footer.html', 'footer-container');
+      initSearch();
+      loadRecommendations();
+      loadLatestCars();
+    });
+  </script>
+</body>
+</html>
