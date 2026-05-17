@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>فەیڤەریتەکان - ئۆتۆکورد</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/rtl.css">
+</head>
+<body>
+  <div id="navbar-container"></div>
+  <main class="container">
+    <h2>فەیڤەریتەکانم</h2>
+    <div id="favorites-list" class="grid"></div>
+  </main>
+  <div id="footer-container"></div>
+  <script src="../js/api.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/cars.js"></script>
+  <script src="../js/parts.js"></script>
+  <script>
+    loadComponent('../components/navbar.html', 'navbar-container');
+    loadComponent('../components/footer.html', 'footer-container');
+    fetchAPI('/favorites').then(data => {
+      const container = document.getElementById('favorites-list');
+      container.innerHTML = data.data.map(fav => {
+        if (fav.itemType === 'car') return renderCarCard(fav.itemId);
+        else return renderPartCard(fav.itemId);
+      }).join('');
+    });
+  </script>
+</body>
+</html>
