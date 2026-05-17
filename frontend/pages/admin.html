@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>پەڕەی بەڕێوەبەر - ئۆتۆکورد</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/rtl.css">
+</head>
+<body>
+  <div id="navbar-container"></div>
+  <main class="container">
+    <h2>داشبۆردی بەڕێوەبەر</h2>
+    <div id="admin-stats" class="stats-grid"></div>
+    <h3>بەکارهێنەران</h3>
+    <div id="users-table"></div>
+    <h3>ئۆتۆمبێل و پارچە</h3>
+    <div id="listings"></div>
+  </main>
+  <div id="footer-container"></div>
+  <script src="../js/api.js"></script>
+  <script src="../js/utils.js"></script>
+  <script>
+    loadComponent('../components/navbar.html', 'navbar-container');
+    loadComponent('../components/footer.html', 'footer-container');
+    fetchAPI('/admin/dashboard').then(data => {
+      const stats = data.data;
+      document.getElementById('admin-stats').innerHTML = `
+        <div class="stat-card">بەکارهێنەران: ${stats.usersCount}</div>
+        <div class="stat-card">ئۆتۆمبێل: ${stats.carsCount}</div>
+        <div class="stat-card">پارچە: ${stats.partsCount}</div>
+        <div class="stat-card">داواکاری: ${stats.ordersCount}</div>
+      `;
+    });
+  </script>
+</body>
+</html>
