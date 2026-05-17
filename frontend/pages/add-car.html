@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>زیادکردنی ئۆتۆمبێل - ئۆتۆکورد</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/rtl.css">
+</head>
+<body>
+  <div id="navbar-container"></div>
+  <main class="container" style="max-width:600px;margin:2rem auto;">
+    <h2>زیادکردنی ئۆتۆمبێلی نوێ</h2>
+    <form id="add-car-form" enctype="multipart/form-data">
+      <input name="make" placeholder="مارکە (تۆیۆتا)" required>
+      <input name="model" placeholder="مۆدێل (کەمری)" required>
+      <input name="year" type="number" placeholder="ساڵ" required>
+      <input name="price" type="number" placeholder="نرخ" required>
+      <select name="transmission">
+        <option value="automatic">ئۆتۆماتیک</option>
+        <option value="manual">دەستی</option>
+      </select>
+      <textarea name="description" placeholder="باسکردن"></textarea>
+      <input type="file" name="images" multiple accept="image/*">
+      <button type="submit">تۆمارکردن</button>
+    </form>
+  </main>
+  <div id="footer-container"></div>
+  <script src="../js/api.js"></script>
+  <script src="../js/utils.js"></script>
+  <script>
+    loadComponent('../components/navbar.html', 'navbar-container');
+    loadComponent('../components/footer.html', 'footer-container');
+    document.getElementById('add-car-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const res = await fetch(API_BASE + '/cars', {
+        method: 'POST',
+        headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') },
+        body: formData
+      });
+      if (res.ok) window.location.href = 'dashboard.html';
+      else alert('هەڵە ڕوویدا');
+    });
+  </script>
+</body>
+</html>
