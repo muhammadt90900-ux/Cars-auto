@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>چوونەژوورەوە - ئۆتۆکورد</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/rtl.css">
+</head>
+<body>
+  <div id="navbar-container"></div>
+  <main class="container" style="max-width:400px;margin:2rem auto;">
+    <h2>چوونەژوورەوە</h2>
+    <form id="login-form">
+      <input type="email" id="email" placeholder="ئیمەیڵ" required>
+      <input type="password" id="password" placeholder="وشەی نهێنی" required>
+      <button type="submit">چوونەژوورەوە</button>
+    </form>
+    <p>ئەکاونتت نییە؟ <a href="register.html">خۆتۆمارکردن</a></p>
+  </main>
+  <div id="footer-container"></div>
+  <script src="../js/api.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/auth.js"></script>
+  <script>
+    loadComponent('../components/navbar.html', 'navbar-container');
+    loadComponent('../components/footer.html', 'footer-container');
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      try {
+        const user = await login(email, password);
+        window.location.href = 'dashboard.html';
+      } catch (err) {
+        alert(err.message);
+      }
+    });
+  </script>
+</body>
+</html>
