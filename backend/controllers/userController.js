@@ -1,3 +1,25 @@
+exports.getUsers = async (req, res) => {
+  res.json({ success: true, users: [] });
+};
+
+exports.getUserById = async (req, res) => {
+  res.json({ success: true, user: {} });
+};
+
+exports.updateUser = async (req, res) => {
+  res.json({
+    success: true,
+    message: 'User updated successfully'
+  });
+};
+
+exports.deleteUser = async (req, res) => {
+  res.json({
+    success: true,
+    message: 'User deleted successfully'
+  });
+};
+
 exports.getProfile = async (req, res) => {
   try {
     res.json({
