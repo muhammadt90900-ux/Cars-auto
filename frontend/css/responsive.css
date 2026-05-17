@@ -1,0 +1,18 @@
+/* frontend/css/responsive.css */
+@media (max-width: 768px) {
+  .dashboard {
+    flex-direction: column;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+}
+@media (max-width: 480px) {
+  .navbar nav a {
+    display: block;
+    margin: 0.3rem 0;
+  }
+}
