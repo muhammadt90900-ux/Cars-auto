@@ -36,7 +36,9 @@ mongoose.connect(process.env.MONGODB_URI || process.env.MONGO_URI)
   });
 
 // Middleware stack
-app.use(helmet());
+app.use(helmet({
+  contentSecurityPolicy: false
+}));
 app.use(securityHeaders);
 app.use(cors({ origin: process.env.FRONTEND_URL || 'http://localhost:3000', credentials: true }));
 app.use(morgan('dev'));
