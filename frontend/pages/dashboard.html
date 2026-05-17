@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>داشبۆرد - ئۆتۆکورد</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/rtl.css">
+</head>
+<body>
+  <div id="navbar-container"></div>
+  <div class="dashboard">
+    <aside class="dashboard-sidebar">
+      <h3>پەڕەی بەکارهێنەر</h3>
+      <a href="add-car.html">زیادکردنی ئۆتۆمبێل</a>
+      <a href="add-part.html">زیادکردنی پارچە</a>
+      <a href="favorites.html">فەیڤەریت</a>
+      <a href="profile.html">پرۆفایل</a>
+      <a href="#" id="logout">دەرچوون</a>
+    </aside>
+    <main class="dashboard-main">
+      <h2>سڵاو، <span id="user-name"></span>!</h2>
+      <div class="stats-grid" id="user-stats"></div>
+      <h3>لیستەکانی من</h3>
+      <div id="my-cars" class="grid"></div>
+      <div id="my-parts" class="grid"></div>
+    </main>
+  </div>
+  <div id="footer-container"></div>
+  <script src="../js/api.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/dashboard.js"></script>
+  <script src="../js/cars.js"></script>
+  <script src="../js/parts.js"></script>
+  <script>
+    loadComponent('../components/navbar.html', 'navbar-container');
+    loadComponent('../components/footer.html', 'footer-container');
+    (async () => {
+      try {
+        const userRes = await fetchAPI('/auth/me');
+        const user = userRes.data;
+        document.getElementById('user-name').textContent = user.name;
+        const carsRes = await fetchAPI('/cars?seller=' + user._id);
+        document.getElementById('my-cars').innerHTML = carsRes.data.map(renderCarCard).join('');
+        const partsRes = await fetchAPI('/parts?seller=' + user._id);
+        document.getElementById('my-parts').innerHTML = partsRes.data.map(renderPartCard).join('');
+      } catch(e) { window.location.href = 'login.html'; }
+    })();
+    document.getElementById('logout').addEventListener('click', () => {
+      localStorage.removeItem('token');
+      window.location.href = '../index.html';
+    });
+  </script>
+</body>
+</html>
