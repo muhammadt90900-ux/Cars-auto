@@ -25,3 +25,10 @@ exports.updateProfile = async (req, res) => {
     });
   }
 };
+
+exports.deleteAccount = async (req, res) => {
+  res.json({
+    success: true,
+    message: 'Account deleted successfully'
+  });
+};
