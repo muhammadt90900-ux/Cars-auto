@@ -1,41 +1,166 @@
+/* css/dashboard.css */
 
----
-
-## 🎨 بەشی ڕووکار – فایلی CSS ماوە
-
-### `dashboard.css`
-```css
-/* frontend/css/dashboard.css */
+/* داشبۆرد ساختار */
 .dashboard {
   display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  padding: 2rem;
+  min-height: calc(100vh - 68px);
 }
+
 .dashboard-sidebar {
-  flex: 1 1 250px;
-  background: var(--primary);
-  color: white;
-  padding: 1.5rem;
-  border-radius: 10px;
+  width: 240px;
+  flex-shrink: 0;
+  background: var(--bg-card);
+  border-left: 1px solid var(--border);
+  padding: 1.75rem 1rem;
+  position: sticky;
+  top: 68px;
+  height: calc(100vh - 68px);
+  overflow-y: auto;
 }
+
+.dashboard-sidebar .sidebar-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  padding: 0 0.75rem;
+  margin-bottom: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.dashboard-sidebar .sidebar-label:first-child { margin-top: 0; }
+
 .dashboard-sidebar a {
-  color: white;
-  display: block;
-  padding: 0.5rem 0;
-  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--text-muted);
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+  margin-bottom: 0.15rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all var(--transition);
 }
+
+.dashboard-sidebar a .icon { font-size: 1rem; }
+
+.dashboard-sidebar a:hover {
+  background: rgba(200,168,75,0.08);
+  color: var(--text-main);
+}
+
+.dashboard-sidebar a.active {
+  background: rgba(200,168,75,0.12);
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.dashboard-sidebar a#logout {
+  color: var(--danger);
+  margin-top: 1rem;
+}
+
+.dashboard-sidebar a#logout:hover { background: rgba(224,82,82,0.1); }
+
+/* مەین */
 .dashboard-main {
-  flex: 3 1 600px;
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  min-width: 0;
 }
+
+.dashboard-main h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 0.3rem;
+}
+
+.dashboard-main h2 span { color: var(--primary); }
+
+.dashboard-subtitle {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  margin-bottom: 2rem;
+}
+
+/* ئامارەکان */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1rem;
+  margin-bottom: 2.5rem;
 }
+
 .stat-card {
-  background: var(--light);
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition);
+}
+
+.stat-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 60px; height: 60px;
+  background: radial-gradient(circle, rgba(200,168,75,0.08), transparent 70%);
+  border-radius: 50%;
+}
+
+.stat-card .stat-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.6rem;
+  opacity: 0.8;
+}
+
+.stat-card .stat-num {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+
+.stat-card .stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* بەشی ناوەرۆک */
+.dashboard-section {
+  margin-bottom: 2.5rem;
+}
+
+.dashboard-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.dashboard-section-header h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  position: relative;
+  padding-right: 0.85rem;
+}
+
+.dashboard-section-header h3::before {
+  content: '';
+  position: absolute;
+  right: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 70%;
+  background: var(--primary);
+  border-radius: 2px;
 }
