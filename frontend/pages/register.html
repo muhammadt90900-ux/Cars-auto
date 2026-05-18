@@ -2,34 +2,72 @@
 <html lang="ku" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>خۆتۆمارکردن - ئۆتۆکورد</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>خۆتۆمارکردن — ئۆتۆکورد</title>
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/rtl.css">
+  <link rel="stylesheet" href="../css/animations.css">
 </head>
 <body>
   <div id="navbar-container"></div>
-  <main class="container" style="max-width:400px;margin:2rem auto;">
-    <h2>خۆتۆمارکردن</h2>
-    <form id="register-form">
-      <input type="text" id="name" placeholder="ناو" required>
-      <input type="email" id="email" placeholder="ئیمەیڵ" required>
-      <input type="password" id="password" placeholder="وشەی نهێنی" required>
-      <input type="tel" id="phone" placeholder="ژمارەی مۆبایل">
-      <button type="submit">خۆتۆمارکردن</button>
-    </form>
+
+  <main>
+    <div class="form-card fade-in" style="max-width:520px">
+      <h2>دروستکردنی هەژمار</h2>
+      <p class="subtitle">بەشداربە لە گەورەترین بازاڕی ئۆتۆمبێلی کوردستان</p>
+
+      <form id="register-form">
+        <div class="form-group">
+          <label for="name">ناوی تەواو</label>
+          <input type="text" id="name" placeholder="ناوی خۆت بنووسە" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">ئیمەیڵ</label>
+          <input type="email" id="email" placeholder="name@example.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">ژمارەی مۆبایل</label>
+          <input type="tel" id="phone" placeholder="+964 7XX XXX XXXX">
+        </div>
+
+        <div class="form-group">
+          <label for="password">وشەی نهێنی</label>
+          <input type="password" id="password" placeholder="کەمترین ٨ پیت" required>
+        </div>
+
+        <button type="submit" class="btn btn-submit" id="submit-btn">
+          دروستکردنی هەژمار
+        </button>
+      </form>
+
+      <p class="form-footer">
+        پێشتر هەژمارت هەیە؟
+        <a href="login.html">چوونەژوورەوە</a>
+      </p>
+    </div>
   </main>
+
   <div id="footer-container"></div>
+
   <script src="../js/api.js"></script>
   <script src="../js/utils.js"></script>
   <script>
     loadComponent('../components/navbar.html', 'navbar-container');
     loadComponent('../components/footer.html', 'footer-container');
+
     document.getElementById('register-form').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
+      const btn = document.getElementById('submit-btn');
+      btn.textContent = 'چاوەڕوانبە...';
+      btn.disabled = true;
+
+      const name     = document.getElementById('name').value;
+      const email    = document.getElementById('email').value;
+      const phone    = document.getElementById('phone').value;
       const password = document.getElementById('password').value;
-      const phone = document.getElementById('phone').value;
+
       try {
         await fetchAPI('/auth/register', {
           method: 'POST',
@@ -37,6 +75,8 @@
         });
         window.location.href = 'login.html';
       } catch (err) {
+        btn.textContent = 'دروستکردنی هەژمار';
+        btn.disabled = false;
         alert(err.message);
       }
     });
