@@ -1,4 +1,97 @@
 <!-- components/footer.html -->
+<style>
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 3rem;
+    padding: 3rem 1.5rem 2rem;
+    text-align: right;
+  }
+
+  .footer-brand .logo {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 0.75rem;
+  }
+
+  .footer-brand .logo span { color: var(--primary); }
+
+  .footer-brand p {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    line-height: 1.7;
+    max-width: 280px;
+  }
+
+  .footer-col h4 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    margin-bottom: 1rem;
+  }
+
+  .footer-col a {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+    transition: color var(--transition);
+  }
+
+  .footer-col a:hover { color: var(--primary); }
+
+  .footer-bottom {
+    border-top: 1px solid var(--border);
+    padding: 1.25rem 1.5rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+  }
+
+  .footer-bottom span { color: var(--primary); }
+
+  @media (max-width: 768px) {
+    .footer-inner { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  }
+
+  @media (max-width: 500px) {
+    .footer-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+  }
+</style>
+
 <footer>
-  <p>© 2025 AutoKurd. هەموو مافێک پارێزراوە.</p>
+  <div class="footer-inner">
+    <!-- بڕاندی -->
+    <div class="footer-brand">
+      <div class="logo">ئۆتۆ<span>کورد</span></div>
+      <p>بازاڕی ئۆنلاینی ئۆتۆمبێل و پارچەی یەدەک لە کوردستان. مەشینی خەوتت پەیدا بکە.</p>
+    </div>
+
+    <!-- لینکەکان -->
+    <div class="footer-col">
+      <h4>پەڕەکان</h4>
+      <a href="/index.html">سەرەکی</a>
+      <a href="/pages/search.html">گەڕان بۆ مەشین</a>
+      <a href="/pages/parts.html">پارچەکان</a>
+      <a href="/pages/add-car.html">فرۆشتنی مەشین</a>
+    </div>
+
+    <!-- هەژمار -->
+    <div class="footer-col">
+      <h4>هەژمار</h4>
+      <a href="/pages/login.html">چوونەژوورەوە</a>
+      <a href="/pages/register.html">خۆتۆمارکردن</a>
+      <a href="/pages/dashboard.html">داشبۆرد</a>
+      <a href="/pages/favorites.html">فەیڤەریتەکان</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    © ٢٠٢٥ <span>ئۆتۆکورد</span> — هەموو مافێک پارێزراوە
+  </div>
 </footer>
