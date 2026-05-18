@@ -1,8 +1,37 @@
-<!-- Universal card template (can be used as a snippet) -->
-<div class="card">
-  <img src="" alt="">
+<!-- components/card.html — شێوازی کارد (تێپەڕ بە JS دەڵێرێت) -->
+<!--
+  بەکارهێنان لە JS:
+  renderCarCard(car) یان renderPartCard(part)
+  تێپەڕی بۆ وەک innerHTML
+-->
+
+<!-- نموونەی ستاتیک بۆ پشان دان -->
+<div class="card fade-in">
+  <!-- دوگمەی دڵ -->
+  <button class="fav-btn" aria-label="زیادکردن بۆ فەیڤەریت">♡</button>
+
+  <!-- ئیمەج -->
+  <a href="#">
+    <img src="../images/placeholder.jpg" alt="ئۆتۆمبێل" loading="lazy">
+  </a>
+
+  <!-- جەستەی کارد -->
   <div class="card-body">
-    <h4></h4>
-    <p></p>
+    <!-- بادجەکان -->
+    <div class="card-meta">
+      <span class="badge badge-new">تازە</span>
+      <span class="badge badge-km">٤٥,٠٠٠ کم</span>
+    </div>
+
+    <h4>تۆیۆتا لاندکروزەر ٢٠٢٣</h4>
+    <p>بەغدا — بەرێوەبراوی باش</p>
+    <div class="price">$٦٥,٠٠٠</div>
+
+    <!-- دوگمەکان -->
+    <div class="card-actions">
+      <a href="#" class="btn btn-primary">وردەکاری</a>
+      <button class="btn btn-icon" title="چات">💬</button>
+      <button class="btn btn-icon" title="هاوبەش کردن">🔗</button>
+    </div>
   </div>
 </div>
