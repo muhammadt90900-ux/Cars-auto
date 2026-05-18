@@ -1,36 +1,647 @@
-/* css/style.css */
+/* ==========================================
+   ئۆتۆکورد - سیستەمی دیزاینی گشتی
+   ========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap');
+
 :root {
-  --primary: #1a73e8;
-  --secondary: #e8f0fe;
-  --dark: #333;
-  --light: #f8f8f8;
+  /* رەنگی سەرەکی */
+  --primary:       #C8A84B;   /* زێڕ */
+  --primary-dark:  #9E7B2F;
+  --primary-light: #F0D98A;
+  --bg-dark:       #0D0D0D;   /* ڕەش */
+  --bg-card:       #1A1A1A;
+  --bg-card-hover: #222222;
+  --border:        #2E2E2E;
+  --text-main:     #F0F0F0;
+  --text-muted:    #888;
+  --text-dim:      #555;
+  --danger:        #E05252;
+  --success:       #4CAF82;
+  --radius:        12px;
+  --radius-lg:     20px;
+  --shadow:        0 4px 24px rgba(0,0,0,0.5);
+  --shadow-gold:   0 4px 24px rgba(200,168,75,0.2);
+  --transition:    0.25s cubic-bezier(0.4,0,0.2,1);
 }
+
+/* ==================== ڕیسێتی گشتی ==================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
 body {
-  font-family: 'Segoe UI', Tahoma, sans-serif;
-  margin: 0;
-  padding: 0;
-  background: #fff;
-  color: var(--dark);
+  font-family: 'Tajawal', sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-main);
+  direction: rtl;
+  text-align: right;
+  min-height: 100vh;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
 }
-header, footer {
-  background: var(--primary);
-  color: white;
-  padding: 1rem;
+
+a { color: var(--primary); text-decoration: none; transition: color var(--transition); }
+a:hover { color: var(--primary-light); }
+
+img { max-width: 100%; display: block; }
+
+button, .btn {
+  cursor: pointer;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  outline: none;
+  transition: all var(--transition);
 }
-a { color: var(--primary); text-decoration: none; }
+
+/* ==================== گرید ==================== */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
   gap: 1.5rem;
   padding: 1.5rem;
 }
-.card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
-  background: white;
-  transition: box-shadow 0.3s;
+
+/* ==================== کۆنتەینەر ==================== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
 }
-.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-.card img { width: 100%; height: 200px; object-fit: cover; }
-.card-body { padding: 1rem; }
+
+/* ==================== کارد ==================== */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all var(--transition);
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary);
+  box-shadow: var(--shadow-gold);
+}
+
+.card img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.card:hover img { transform: scale(1.04); }
+
+.card-body { padding: 1.1rem 1.25rem 1.25rem; }
+
+.card-body h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.3rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-body .price {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.card-body p {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+}
+
+.card-meta {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.9rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge-new   { background: rgba(200,168,75,0.15); color: var(--primary); border: 1px solid rgba(200,168,75,0.3); }
+.badge-used  { background: rgba(136,136,136,0.1);  color: var(--text-muted); border: 1px solid var(--border); }
+.badge-km    { background: rgba(76,175,130,0.12); color: var(--success); border: 1px solid rgba(76,175,130,0.25); }
+
+.card-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-primary {
+  flex: 1;
+  background: var(--primary);
+  color: #000;
+  padding: 0.55rem 1rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.btn-primary:hover {
+  background: var(--primary-light);
+  transform: scale(1.02);
+}
+
+.btn-icon {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--border) !important;
+  border-radius: 8px;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+.btn-icon:hover { border-color: var(--primary) !important; color: var(--primary); }
+
+.card .fav-btn {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 34px;
+  height: 34px;
+  background: rgba(0,0,0,0.55);
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: all var(--transition);
+}
+
+.card .fav-btn:hover  { background: var(--danger); color: #fff; }
+.card .fav-btn.active { background: var(--danger); color: #fff; }
+
+/* ==================== هێرۆ ==================== */
+.hero {
+  position: relative;
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(200,168,75,0.12) 0%, transparent 70%),
+    linear-gradient(180deg, #0D0D0D 0%, #111 100%);
+  padding: 4rem 1.5rem;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 80%, rgba(200,168,75,0.06) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(200,168,75,0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* خەتی زێڕی سەرووی هێرۆ */
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+}
+
+.hero-content { position: relative; z-index: 1; max-width: 750px; }
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(200,168,75,0.1);
+  border: 1px solid rgba(200,168,75,0.3);
+  color: var(--primary);
+  padding: 0.35rem 1rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.03em;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--text-main);
+  margin-bottom: 1rem;
+}
+
+.hero h1 span { color: var(--primary); }
+
+.hero p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  margin-bottom: 2.5rem;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ==================== سەرچ باکس ==================== */
+.search-box {
+  display: flex;
+  gap: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  box-shadow: var(--shadow);
+  transition: border-color var(--transition);
+}
+
+.search-box:focus-within { border-color: var(--primary); }
+
+.search-box input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 1rem 1.25rem;
+  color: var(--text-main);
+  font-family: 'Tajawal', sans-serif;
+  font-size: 1rem;
+  direction: rtl;
+}
+
+.search-box input::placeholder { color: var(--text-dim); }
+
+.search-box button {
+  background: var(--primary);
+  color: #000;
+  padding: 0.9rem 1.75rem;
+  font-weight: 700;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.search-box button:hover { background: var(--primary-light); }
+
+/* ==================== ئامارە سەرەکیەکان ==================== */
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.hero-stat { text-align: center; }
+
+.hero-stat .num {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1;
+}
+
+.hero-stat .lbl {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+/* ==================== بەشی ناوەرۆک ==================== */
+.section { padding: 3rem 0; }
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-main);
+  position: relative;
+  padding-right: 1rem;
+}
+
+.section-title::before {
+  content: '';
+  position: absolute;
+  right: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 70%;
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+.section-link {
+  font-size: 0.875rem;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* ==================== فیلتەر بار ==================== */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+}
+
+.filter-bar input,
+.filter-bar select {
+  background: var(--bg-dark);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-main);
+  padding: 0.5rem 0.9rem;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color var(--transition);
+  min-width: 130px;
+}
+
+.filter-bar input:focus,
+.filter-bar select:focus { border-color: var(--primary); }
+
+.filter-bar input::placeholder { color: var(--text-dim); }
+
+.filter-bar button {
+  background: var(--primary);
+  color: #000;
+  padding: 0.5rem 1.4rem;
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+.filter-bar button:hover { background: var(--primary-light); }
+
+/* ==================== فۆرم ==================== */
+.form-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  max-width: 480px;
+  margin: 3rem auto;
+  box-shadow: var(--shadow);
+}
+
+.form-card h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 0.4rem;
+  color: var(--text-main);
+}
+
+.form-card .subtitle {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.1rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  background: var(--bg-dark);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text-main);
+  padding: 0.75rem 1rem;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  direction: rtl;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(200,168,75,0.12);
+}
+
+.form-group input::placeholder { color: var(--text-dim); }
+
+.btn-submit {
+  width: 100%;
+  background: var(--primary);
+  color: #000;
+  padding: 0.9rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 800;
+  margin-top: 0.5rem;
+}
+
+.btn-submit:hover {
+  background: var(--primary-light);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(200,168,75,0.3);
+}
+
+.form-footer {
+  text-align: center;
+  margin-top: 1.25rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.form-footer a { color: var(--primary); font-weight: 600; }
+
+/* ==================== داشبۆرد ==================== */
+.dashboard {
+  display: flex;
+  min-height: calc(100vh - 70px);
+}
+
+.dashboard-sidebar {
+  width: 250px;
+  background: var(--bg-card);
+  border-left: 1px solid var(--border);
+  padding: 2rem 1.25rem;
+  flex-shrink: 0;
+}
+
+.dashboard-sidebar h3 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.dashboard-sidebar a {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--text-muted);
+  padding: 0.65rem 0.75rem;
+  border-radius: 8px;
+  margin-bottom: 0.25rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all var(--transition);
+}
+
+.dashboard-sidebar a:hover,
+.dashboard-sidebar a.active {
+  background: rgba(200,168,75,0.1);
+  color: var(--primary);
+}
+
+.dashboard-main { flex: 1; padding: 2rem; overflow-y: auto; }
+
+.dashboard-main h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.4rem;
+  transition: border-color var(--transition);
+}
+
+.stat-card:hover { border-color: var(--primary); }
+
+.stat-card .stat-num {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1;
+}
+
+.stat-card .stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.4rem;
+}
+
+/* ==================== فوتەر ==================== */
+footer {
+  background: var(--bg-card);
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.875rem;
+}
+
+footer span { color: var(--primary); }
+
+/* ==================== دیوێدەر ==================== */
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2rem 0;
+}
+
+/* ==================== بەتاڵ بوون ==================== */
+.empty-state {
+  text-align: center;
+  padding: 4rem 1.5rem;
+  color: var(--text-muted);
+}
+
+.empty-state .icon { font-size: 3rem; margin-bottom: 1rem; opacity: 0.4; }
+.empty-state h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-main); }
+
+/* ==================== لۆدینگ ==================== */
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+}
+
+.spinner {
+  width: 40px; height: 40px;
+  border: 3px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ==================== ئامێری ئەلەرت ==================== */
+.toast {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.85rem 1.5rem;
+  color: var(--text-main);
+  font-weight: 600;
+  box-shadow: var(--shadow);
+  z-index: 9999;
+  transition: transform 0.3s ease;
+  white-space: nowrap;
+}
+
+.toast.show { transform: translateX(-50%) translateY(0); }
+.toast.success { border-color: var(--success); color: var(--success); }
+.toast.error   { border-color: var(--danger);  color: var(--danger);  }
