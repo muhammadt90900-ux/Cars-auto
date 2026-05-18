@@ -1,6 +1,14 @@
+<!-- components/filter-bar.html -->
 <div class="filter-bar">
-  <input type="text" placeholder="مارکە...">
-  <input type="number" placeholder="نرخ لە">
-  <input type="number" placeholder="نرخ تا">
-  <button>پاڵاوتن</button>
+  <input type="text"   id="f-brand"    placeholder="مارکە (تۆیۆتا...)">
+  <input type="text"   id="f-model"    placeholder="مۆدێل">
+  <input type="number" id="f-year"     placeholder="ساڵ">
+  <input type="number" id="f-min"      placeholder="کەمترین نرخ $">
+  <input type="number" id="f-max"      placeholder="زۆرترین نرخ $">
+  <select id="f-condition">
+    <option value="">هەموو</option>
+    <option value="new">تازە</option>
+    <option value="used">بەکارهێنراو</option>
+  </select>
+  <button onclick="applyFilters()">🔍 پاڵاوتن</button>
 </div>
