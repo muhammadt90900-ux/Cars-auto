@@ -1,2 +1,11 @@
-/* css/rtl.css */
+/* css/rtl.css — RTL پاڵپشتی */
 body { direction: rtl; text-align: right; }
+
+/* فۆرمەکانیش RTL بن */
+input, textarea, select { text-align: right; }
+
+/* سەرچ باکس لە مۆبایل */
+@media (max-width: 600px) {
+  .search-box { flex-direction: column; border-radius: var(--radius); }
+  .search-box button { border-radius: 0 0 var(--radius) var(--radius); }
+}
