@@ -3,27 +3,87 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ئۆتۆکورد - بازاڕی ئۆتۆمبێل و پارچە</title>
+  <title>ئۆتۆکورد — بازاڕی ئۆتۆمبێل و پارچە</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/rtl.css">
   <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
+
+  <!-- ناڤبار -->
   <div id="navbar-container"></div>
+
   <main>
+    <!-- ==================== هێرۆ ==================== -->
     <section class="hero">
-      <h1>بازاڕی ئۆتۆمبێل و پارچە لە کوردستان</h1>
-      <div class="search-box">
-        <input type="text" id="main-search" placeholder="گەڕان بۆ ئۆتۆمبێل یان پارچە...">
-        <button id="search-btn">گەڕان</button>
+      <div class="hero-content fade-in">
+        <!-- بادجی سەرووی -->
+        <div class="hero-eyebrow">
+          🚗 بازاڕی ئۆتۆمبێل ژمارە یەک لە کوردستان
+        </div>
+
+        <!-- ناوه‌رۆکی سەرەکی -->
+        <h1>
+          مەشینی خەوتت<br>
+          لێرەی <span>پەیدا دەکەیت</span>
+        </h1>
+
+        <p>هەزاران ئۆتۆمبێل و پارچەی یەدەک — نرخی ڕاست، فرۆشیاری پشتیوان</p>
+
+        <!-- سەرچ باکس -->
+        <div class="search-box">
+          <input
+            type="text"
+            id="main-search"
+            placeholder="گەڕان بۆ مارکە، مۆدێل یان پارچە..."
+            autocomplete="off"
+          >
+          <button id="search-btn">گەڕان</button>
+        </div>
+
+        <!-- ئامارەکان -->
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="num" id="stat-cars">٢٤٠٠+</span>
+            <span class="lbl">ئۆتۆمبێل</span>
+          </div>
+          <div class="hero-stat">
+            <span class="num" id="stat-parts">٨٩٠٠+</span>
+            <span class="lbl">پارچەی یەدەک</span>
+          </div>
+          <div class="hero-stat">
+            <span class="num" id="stat-sellers">١٢٠٠+</span>
+            <span class="lbl">فرۆشیار</span>
+          </div>
+        </div>
       </div>
     </section>
-    <section id="recommendations" class="grid"></section>
-    <section id="latest-cars" class="grid"></section>
+
+    <!-- ==================== ئۆتۆمبێلی پێشنیارکراو ==================== -->
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">پێشنیارکراوەکان</h2>
+        <a href="pages/search.html" class="section-link">هەموو ببینە ←</a>
+      </div>
+      <div id="recommendations" class="grid"></div>
+    </section>
+
+    <!-- ==================== دوایین ئۆتۆمبێلەکان ==================== -->
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">دوایین داڕشتراوەکان</h2>
+        <a href="pages/search.html" class="section-link">هەموو ببینە ←</a>
+      </div>
+      <div id="latest-cars" class="grid"></div>
+    </section>
   </main>
+
+  <!-- فوتەر -->
   <div id="footer-container"></div>
 
+  <!-- سکریپتەکان -->
   <script src="js/api.js"></script>
   <script src="js/utils.js"></script>
   <script src="js/i18n.js"></script>
@@ -32,14 +92,33 @@
   <script src="js/recommendation.js"></script>
   <script src="js/cars.js"></script>
   <script src="js/push.js"></script>
+
   <script>
-    // Initialize page
     document.addEventListener('DOMContentLoaded', () => {
       loadComponent('components/navbar.html', 'navbar-container');
       loadComponent('components/footer.html', 'footer-container');
       initSearch();
       loadRecommendations();
       loadLatestCars();
+
+      // لۆدینگ پلێس هۆڵدەر
+      const showSkeletons = (id, count = 4) => {
+        const container = document.getElementById(id);
+        if (!container) return;
+        container.innerHTML = Array(count).fill(`
+          <div class="card">
+            <div class="skeleton" style="height:210px"></div>
+            <div class="card-body">
+              <div class="skeleton" style="height:14px;width:60%;margin-bottom:8px"></div>
+              <div class="skeleton" style="height:14px;width:40%;margin-bottom:12px"></div>
+              <div class="skeleton" style="height:38px"></div>
+            </div>
+          </div>
+        `).join('');
+      };
+
+      showSkeletons('recommendations');
+      showSkeletons('latest-cars');
     });
   </script>
 </body>
