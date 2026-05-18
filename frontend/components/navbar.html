@@ -1,9 +1,125 @@
 <!-- components/navbar.html -->
-<header>
-  <div class="logo">ئۆتۆکورد</div>
-  <nav>
-    <a href="index.html">سەرەکی</a>
-    <a href="pages/dashboard.html">داشبۆرد</a>
-    <a href="pages/login.html">چوونەژوورەوە</a>
-  </nav>
-</header>
+<style>
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    height: 68px;
+    background: rgba(13,13,13,0.92);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .navbar-logo {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--text-main);
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .navbar-logo .logo-dot { color: var(--primary); }
+
+  .navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    list-style: none;
+  }
+
+  .navbar-nav a {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.45rem 0.9rem;
+    border-radius: 8px;
+    transition: all var(--transition);
+  }
+
+  .navbar-nav a:hover { color: var(--text-main); background: rgba(255,255,255,0.05); }
+  .navbar-nav a.active { color: var(--primary); }
+
+  .navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .navbar-actions .btn-nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 1rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    transition: all var(--transition);
+  }
+
+  .btn-nav-ghost {
+    color: var(--text-muted);
+    background: transparent;
+    border: 1px solid var(--border);
+  }
+
+  .btn-nav-ghost:hover { border-color: var(--primary); color: var(--primary); background: rgba(200,168,75,0.06); }
+
+  .btn-nav-gold {
+    color: #000;
+    background: var(--primary);
+    border: 1px solid transparent;
+  }
+
+  .btn-nav-gold:hover { background: var(--primary-light); }
+
+  /* مۆبایل مێنو دوگمە */
+  .menu-toggle {
+    display: none;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    .navbar { padding: 0 1rem; }
+    .navbar-nav { display: none; }
+    .menu-toggle { display: flex; }
+    .navbar-actions .btn-nav-ghost { display: none; }
+  }
+</style>
+
+<nav class="navbar">
+  <!-- لۆگۆ -->
+  <a href="/index.html" class="navbar-logo">
+    ئۆتۆ<span class="logo-dot">کورد</span>
+  </a>
+
+  <!-- لینکەکان -->
+  <ul class="navbar-nav">
+    <li><a href="/index.html">سەرەکی</a></li>
+    <li><a href="/pages/search.html">گەڕان</a></li>
+    <li><a href="/pages/parts.html">پارچەکان</a></li>
+    <li><a href="/pages/dashboard.html">داشبۆرد</a></li>
+  </ul>
+
+  <!-- دوگمەکان -->
+  <div class="navbar-actions">
+    <a href="/pages/login.html" class="btn-nav btn-nav-ghost">چوونەژوورەوە</a>
+    <a href="/pages/register.html" class="btn-nav btn-nav-gold">خۆتۆمارکردن</a>
+    <button class="menu-toggle" aria-label="مێنو">☰</button>
+  </div>
+</nav>
